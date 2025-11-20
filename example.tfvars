@@ -1,6 +1,6 @@
 ### General
-region      = "eu-west-1" # TODO: update here
-name_prefix = "example-"  # TODO: update here
+region      = "eu-north-1" # TODO: update here
+name_prefix = "pa-"  # TODO: update here
 
 global_tags = {
   ManagedBy   = "terraform"
@@ -155,6 +155,7 @@ vpcs = {
           }
         }
       }
+      
       application_load_balancer = {
         name = "alb"
         rules = {
@@ -196,6 +197,7 @@ vpcs = {
       "10.100.7.0/24"  = { az = "eu-west-1a", subnet_group = "nlb" }
       "10.100.71.0/24" = { az = "eu-west-1b", subnet_group = "nlb" }
     }
+    
     routes = {
       # Value of `next_hop_key` must match keys use to create TGW attachment, IGW, GWLB endpoint or other resources
       # Value of `next_hop_type` is internet_gateway, nat_gateway, transit_gateway_attachment or gwlbe_endpoint
@@ -528,8 +530,8 @@ gwlb_endpoints = {
 vmseries = {
   vmseries = {
     instances = {
-      "01" = { az = "eu-west-1a" }
-      "02" = { az = "eu-west-1b" }
+      "01" = { az = "eu-north-1a" }
+      "02" = { az = "eu-north-1b" }
     }
 
     # Value of `panorama-server`, `auth-key`, `dgname`, `tplname` can be taken from plugin `sw_fw_license`. Delete map if SCM bootstrap required.
@@ -616,6 +618,7 @@ vmseries = {
       ntp_primary = "pool.ntp.org" # TODO: update here
     }
 
+  
     application_lb = {
       name           = "public-alb"
       subnet_group   = "alb"
@@ -653,6 +656,7 @@ vmseries = {
         }
       }
     }
+
     network_lb = {
       name         = "public-nlb"
       subnet_group = "nlb"

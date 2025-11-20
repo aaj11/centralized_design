@@ -1,0 +1,36 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      # Download and install Terraform CLI (adjust version as needed)
+      - curl -s https://releases.hashicorp.com/terraform/1.13.5/terraform_1.13.5_linux_amd64.zip -o terraform.zip
+      - unzip terraform.zip -d /usr/local/bin
+      - chmod 755 /usr/local/bin/terraform
+      # Verify installation
+      - terraform version
+
+  pre_build:
+    commands:
+      # Initialize the Terraform working directory (e.g., S3 backend configuration)
+      - terraform init
+      # Optional: Run static analysis tools like tfsec or checkov
+      # - tfsec .
+      # - checkov -d .
+
+  build:
+    commands:
+      # Create a Terraform plan and save it to an artifact file
+      - terraform plan -out=tfplan
+
+  post_build:
+    commands:
+      # Apply the planned changes to deploy the infrastructure
+      - terraform apply "tfplan"
+
+artifacts:
+  files:
+    # Save the plan artifact and any other relevant files
+    - tfplan
+  discard-paths: yes
+
