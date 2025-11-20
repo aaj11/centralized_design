@@ -1,6 +1,6 @@
 
 resource "aws_s3_bucket" "tfbucket" {
-    bucket = "tfstate-centralized_design"
+    bucket = "tfstate-centralized-design"
     versioning {
         enabled = true
     }
@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "tfbucket" {
 }
 
 resource "aws_dynamodb_table" "tfstate" {
-    name = "tf-state-lock"
+    name = "tf-centralized-desing-state-lock"
     billing_mode = "PAY_PER_REQUEST"
     hash_key = "LockID"
 
