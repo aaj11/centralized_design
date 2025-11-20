@@ -1,4 +1,5 @@
 
+/*
 resource "aws_s3_bucket" "tfbucket" {
     bucket = "tfstate-centralized-design"
     versioning {
@@ -23,3 +24,4 @@ resource "aws_dynamodb_table" "tfstate" {
       type = "S"
     }
 }
+*/

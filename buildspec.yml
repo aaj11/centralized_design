@@ -4,7 +4,7 @@ phases:
   install:
     commands:
       # Download and install Terraform CLI (adjust version as needed)
-      - curl -s https://releases.hashicorp.com/terraform/1.13.5/terraform_1.13.5_linux_amd64.zip -o terraform.zip
+      - curl -s https://releases.hashicorp.com/terraform/1.14.0/terraform_1.14.0_linux_amd64.zip -o terraform.zip
       - unzip terraform.zip -d /usr/local/bin
       - chmod 755 /usr/local/bin/terraform
       # Verify installation
