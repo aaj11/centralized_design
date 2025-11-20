@@ -1,7 +1,7 @@
 ### VPCS ###
 
 module "vpc" {
-  source = "../../modules/vpc"
+  source = "modules/vpc"
 
   for_each = var.vpcs
 
@@ -71,7 +71,7 @@ locals {
 }
 
 module "subnet_sets" {
-  source = "../../modules/subnet_set"
+  source = "modules/subnet_set"
 
   for_each = local.subnets
 
@@ -157,7 +157,7 @@ locals {
 }
 
 module "vpc_routes" {
-  source = "../../modules/vpc_route"
+  source = "modules/vpc_route"
 
   for_each = local.vpc_routes
 
@@ -171,7 +171,7 @@ module "vpc_routes" {
 ### NATGW ###
 
 module "natgw_set" {
-  source = "../../modules/nat_gateway_set"
+  source = "modules/nat_gateway_set"
 
   for_each = var.natgws
 
@@ -186,7 +186,7 @@ module "natgw_set" {
 ### TGW ###
 
 module "transit_gateway" {
-  source = "../../modules/transit_gateway"
+  source = "modules/transit_gateway"
 
   for_each = var.tgws
 
@@ -200,7 +200,7 @@ module "transit_gateway" {
 ### TGW ATTACHMENTS ###
 
 module "transit_gateway_attachment" {
-  source = "../../modules/transit_gateway_attachment"
+  source = "modules/transit_gateway_attachment"
 
   for_each = var.tgw_attachments
 
@@ -237,7 +237,7 @@ resource "aws_ec2_transit_gateway_route" "from_security_to_panorama" {
 ### GWLB ###
 
 module "gwlb" {
-  source = "../../modules/gwlb"
+  source = "modules/gwlb"
 
   for_each = var.gwlbs
 
@@ -280,7 +280,7 @@ resource "aws_lb_target_group_attachment" "this" {
 ### GWLB ENDPOINTS ###
 
 module "gwlbe_endpoint" {
-  source = "../../modules/gwlb_endpoint_set"
+  source = "modules/gwlb_endpoint_set"
 
   for_each = var.gwlb_endpoints
 
@@ -392,7 +392,7 @@ locals {
 }
 
 module "vmseries" {
-  source = "../../modules/vmseries"
+  source = "modules/vmseries"
 
   for_each = { for vmseries in local.vmseries_instances : "${vmseries.group}-${vmseries.instance}" => vmseries }
 
@@ -433,7 +433,7 @@ module "vmseries" {
 ### Public ALB and NLB used in centralized model ###
 
 module "public_alb" {
-  source = "../../modules/alb"
+  source = "modules/alb"
 
   for_each = { for k, v in var.vmseries : k => v }
 
@@ -448,7 +448,7 @@ module "public_alb" {
 }
 
 module "public_nlb" {
-  source = "../../modules/nlb"
+  source = "modules/nlb"
 
   for_each = { for k, v in var.vmseries : k => v }
 
@@ -561,7 +561,7 @@ resource "aws_instance" "spoke_vms" {
 ### SPOKE INBOUND APPLICATION LOAD BALANCER ###
 
 module "app_alb" {
-  source = "../../modules/alb"
+  source = "modules/alb"
 
   for_each = var.spoke_albs
 
@@ -578,7 +578,7 @@ module "app_alb" {
 ### SPOKE INBOUND NETWORK LOAD BALANCER ###
 
 module "app_nlb" {
-  source = "../../modules/nlb"
+  source = "modules/nlb"
 
   for_each = var.spoke_nlbs
 
