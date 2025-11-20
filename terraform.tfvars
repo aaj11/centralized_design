@@ -8,7 +8,7 @@ global_tags = {
   Owner       = "PS Team"
 }
 
-ssh_key_name = "example-ssh-key" # TODO: update here
+ssh_key_name = "ssh" # TODO: update here
 
 ### VPC
 vpcs = {
@@ -178,24 +178,24 @@ vpcs = {
       }
     }
     subnets = {
-      "10.100.0.0/24"  = { az = "eu-west-1a", subnet_group = "mgmt" }
-      "10.100.64.0/24" = { az = "eu-west-1b", subnet_group = "mgmt" }
-      "10.100.1.0/24"  = { az = "eu-west-1a", subnet_group = "private", nacl = "trusted_path_monitoring" }
-      "10.100.65.0/24" = { az = "eu-west-1b", subnet_group = "private", nacl = "trusted_path_monitoring" }
-      "10.100.2.0/24"  = { az = "eu-west-1a", subnet_group = "public" }
-      "10.100.66.0/24" = { az = "eu-west-1b", subnet_group = "public" }
-      "10.100.3.0/24"  = { az = "eu-west-1a", subnet_group = "tgw_attach" }
-      "10.100.67.0/24" = { az = "eu-west-1b", subnet_group = "tgw_attach" }
-      "10.100.4.0/24"  = { az = "eu-west-1a", subnet_group = "gwlbe_outbound" }
-      "10.100.68.0/24" = { az = "eu-west-1b", subnet_group = "gwlbe_outbound" }
-      "10.100.5.0/24"  = { az = "eu-west-1a", subnet_group = "gwlb" }
-      "10.100.69.0/24" = { az = "eu-west-1b", subnet_group = "gwlb" } # AWS reccomends to always go up to the last possible AZ for GWLB service
-      "10.100.10.0/24" = { az = "eu-west-1a", subnet_group = "gwlbe_eastwest" }
-      "10.100.74.0/24" = { az = "eu-west-1b", subnet_group = "gwlbe_eastwest" }
-      "10.100.6.0/24"  = { az = "eu-west-1a", subnet_group = "alb" }
-      "10.100.70.0/24" = { az = "eu-west-1b", subnet_group = "alb" }
-      "10.100.7.0/24"  = { az = "eu-west-1a", subnet_group = "nlb" }
-      "10.100.71.0/24" = { az = "eu-west-1b", subnet_group = "nlb" }
+      "10.100.0.0/24"  = { az = "eu-north-1a", subnet_group = "mgmt" }
+      "10.100.64.0/24" = { az = "eu-north-1b", subnet_group = "mgmt" }
+      "10.100.1.0/24"  = { az = "eu-north-1a", subnet_group = "private", nacl = "trusted_path_monitoring" }
+      "10.100.65.0/24" = { az = "eu-north-1b", subnet_group = "private", nacl = "trusted_path_monitoring" }
+      "10.100.2.0/24"  = { az = "eu-north-1a", subnet_group = "public" }
+      "10.100.66.0/24" = { az = "eu-north-1b", subnet_group = "public" }
+      "10.100.3.0/24"  = { az = "eu-north-1a", subnet_group = "tgw_attach" }
+      "10.100.67.0/24" = { az = "eu-north-1b", subnet_group = "tgw_attach" }
+      "10.100.4.0/24"  = { az = "eu-north-1a", subnet_group = "gwlbe_outbound" }
+      "10.100.68.0/24" = { az = "eu-north-1b", subnet_group = "gwlbe_outbound" }
+      "10.100.5.0/24"  = { az = "eu-north-1a", subnet_group = "gwlb" }
+      "10.100.69.0/24" = { az = "eu-north-1b", subnet_group = "gwlb" } # AWS reccomends to always go up to the last possible AZ for GWLB service
+      "10.100.10.0/24" = { az = "eu-north-1a", subnet_group = "gwlbe_eastwest" }
+      "10.100.74.0/24" = { az = "eu-north-1b", subnet_group = "gwlbe_eastwest" }
+      "10.100.6.0/24"  = { az = "eu-north-1a", subnet_group = "alb" }
+      "10.100.70.0/24" = { az = "eu-north-1b", subnet_group = "alb" }
+      "10.100.7.0/24"  = { az = "eu-north-1a", subnet_group = "nlb" }
+      "10.100.71.0/24" = { az = "eu-north-1b", subnet_group = "nlb" }
     }
     
     routes = {
@@ -344,10 +344,10 @@ vpcs = {
       }
     }
     subnets = {
-      "10.104.0.0/24"   = { az = "eu-west-1a", subnet_group = "app1_vm" }
-      "10.104.128.0/24" = { az = "eu-west-1b", subnet_group = "app1_vm" }
-      "10.104.2.0/24"   = { az = "eu-west-1a", subnet_group = "app1_lb" }
-      "10.104.130.0/24" = { az = "eu-west-1b", subnet_group = "app1_lb" }
+      "10.104.0.0/24"   = { az = "eu-north-1a", subnet_group = "app1_vm" }
+      "10.104.128.0/24" = { az = "eu-north-1b", subnet_group = "app1_vm" }
+      "10.104.2.0/24"   = { az = "eu-north-1a", subnet_group = "app1_lb" }
+      "10.104.130.0/24" = { az = "eu-north-1b", subnet_group = "app1_lb" }
     }
     routes = {
       # Value of `next_hop_key` must match keys use to create TGW attachment, IGW, GWLB endpoint or other resources
@@ -425,10 +425,10 @@ vpcs = {
       }
     }
     subnets = {
-      "10.105.0.0/24"   = { az = "eu-west-1a", subnet_group = "app2_vm" }
-      "10.105.128.0/24" = { az = "eu-west-1b", subnet_group = "app2_vm" }
-      "10.105.2.0/24"   = { az = "eu-west-1a", subnet_group = "app2_lb" }
-      "10.105.130.0/24" = { az = "eu-west-1b", subnet_group = "app2_lb" }
+      "10.105.0.0/24"   = { az = "eu-north-1a", subnet_group = "app2_vm" }
+      "10.105.128.0/24" = { az = "eu-north-1b", subnet_group = "app2_vm" }
+      "10.105.2.0/24"   = { az = "eu-north-1a", subnet_group = "app2_lb" }
+      "10.105.130.0/24" = { az = "eu-north-1b", subnet_group = "app2_lb" }
     }
     routes = {
       # Value of `next_hop_key` must match keys use to create TGW attachment, IGW, GWLB endpoint or other resources
@@ -694,28 +694,28 @@ panorama_attachment = {
 ### SPOKE VMS
 spoke_vms = {
   "app1_vm01" = {
-    az             = "eu-west-1a"
+    az             = "eu-north-1a"
     vpc            = "app1_vpc"
     subnet_group   = "app1_vm"
     security_group = "app1_vm"
     type           = "t2.micro"
   }
   "app1_vm02" = {
-    az             = "eu-west-1b"
+    az             = "eu-north-1b"
     vpc            = "app1_vpc"
     subnet_group   = "app1_vm"
     security_group = "app1_vm"
     type           = "t2.micro"
   }
   "app2_vm01" = {
-    az             = "eu-west-1a"
+    az             = "eu-north-1a"
     vpc            = "app2_vpc"
     subnet_group   = "app2_vm"
     security_group = "app2_vm"
     type           = "t2.micro"
   }
   "app2_vm02" = {
-    az             = "eu-west-1b"
+    az             = "eu-north-1b"
     vpc            = "app2_vpc"
     subnet_group   = "app2_vm"
     security_group = "app2_vm"
