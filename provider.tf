@@ -1,3 +1,4 @@
+/*
 terraform {
     backend "s3" {
       bucket = "tfstate-pa"
@@ -7,3 +8,4 @@ terraform {
       encrypt = true
     }
 }
+*/
