@@ -91,18 +91,17 @@ vpcs = {
             type        = "egress", from_port = "0", to_port = "0", protocol = "-1"
             cidr_blocks = ["0.0.0.0/0"]
           }
-          /* Uncomment the following section in case of direct firewall mgmt access required 
+          # Uncomment the following section in case of direct firewall mgmt access required 
           https = {
             description = "Permit HTTPS"
             type        = "ingress", from_port = "443", to_port = "443", protocol = "tcp"
-            cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
+            cidr_blocks = ["185.209.40.0/24","91.153.180.127/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
           }
           ssh = {
             description = "Permit SSH"
             type        = "ingress", from_port = "22", to_port = "22", protocol = "tcp"
-            cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
+            cidr_blocks = ["185.209.40.0/24","91.153.180.127/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
           }
-          */
           panorama_ssh = {
             description = "Permit Panorama SSH (Optional)"
             type        = "ingress", from_port = "22", to_port = "22", protocol = "tcp"
