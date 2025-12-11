@@ -191,9 +191,9 @@ vpcs = {
       #"10.100.69.0/24" = { az = "eu-west-1b", subnet_group = "gwlb" } # AWS reccomends to always go up to the last possible AZ for GWLB service
       "10.100.10.0/24" = { az = "eu-west-1a", subnet_group = "gwlbe_eastwest" }
       #"10.100.74.0/24" = { az = "eu-west-1b", subnet_group = "gwlbe_eastwest" }
-      "10.100.6.0/24"  = { az = "eu-west-1a", subnet_group = "alb" }
+      #"10.100.6.0/24"  = { az = "eu-west-1a", subnet_group = "alb" }
       #"10.100.70.0/24" = { az = "eu-west-1b", subnet_group = "alb" }
-      "10.100.7.0/24"  = { az = "eu-west-1a", subnet_group = "nlb" }
+      #"10.100.7.0/24"  = { az = "eu-west-1a", subnet_group = "nlb" }
       #"10.100.71.0/24" = { az = "eu-west-1b", subnet_group = "nlb" }
     }
     
@@ -345,7 +345,7 @@ vpcs = {
     subnets = {
       "10.104.0.0/24"   = { az = "eu-west-1a", subnet_group = "app1_vm" }
       #"10.104.128.0/24" = { az = "eu-west-1b", subnet_group = "app1_vm" }
-      "10.104.2.0/24"   = { az = "eu-west-1a", subnet_group = "app1_lb" }
+      #"10.104.2.0/24"   = { az = "eu-west-1a", subnet_group = "app1_lb" }
       #"10.104.130.0/24" = { az = "eu-west-1b", subnet_group = "app1_lb" }
     }
     routes = {
@@ -480,22 +480,22 @@ tgw_attachments = {
     route_table             = "from_security_vpc"
     propagate_routes_to     = "from_spoke_vpc"
   }
-  app1 = {
-    tgw_key             = "tgw"
-    name                = "app1-spoke-vpc"
-    vpc                 = "app1_vpc"
-    subnet_group        = "app1_vm"
-    route_table         = "from_spoke_vpc"
-    propagate_routes_to = "from_security_vpc"
-  }
-  app2 = {
-    tgw_key             = "tgw"
-    name                = "app2-spoke-vpc"
-    vpc                 = "app2_vpc"
-    subnet_group        = "app2_vm"
-    route_table         = "from_spoke_vpc"
-    propagate_routes_to = "from_security_vpc"
-  }
+  # app1 = {
+  #   tgw_key             = "tgw"
+  #   name                = "app1-spoke-vpc"
+  #   vpc                 = "app1_vpc"
+  #   subnet_group        = "app1_vm"
+  #   route_table         = "from_spoke_vpc"
+  #   propagate_routes_to = "from_security_vpc"
+  # }
+  # app2 = {
+  #   tgw_key             = "tgw"
+  #   name                = "app2-spoke-vpc"
+  #   vpc                 = "app2_vpc"
+  #   subnet_group        = "app2_vm"
+  #   route_table         = "from_spoke_vpc"
+  #   propagate_routes_to = "from_security_vpc"
+  # }
 }
 
 ### GATEWAY LOADBALANCER
