@@ -787,4 +787,4 @@ spoke_vms = {
 #     subnet_group    = "app2_lb"
 #     security_groups = "app2_lb"
 #   }
-# }
+}
