@@ -155,6 +155,7 @@ vpcs = {
         }
       }
       
+      /*
       application_load_balancer = {
         name = "alb"
         rules = {
@@ -174,7 +175,7 @@ vpcs = {
             cidr_blocks = ["0.0.0.0/0"]
           }
         }
-      }
+      } */
     }
     subnets = {
       "10.100.0.0/24"  = { az = "eu-west-1a", subnet_group = "mgmt" }
@@ -191,9 +192,9 @@ vpcs = {
       #"10.100.69.0/24" = { az = "eu-west-1b", subnet_group = "gwlb" } # AWS reccomends to always go up to the last possible AZ for GWLB service
       "10.100.10.0/24" = { az = "eu-west-1a", subnet_group = "gwlbe_eastwest" }
       #"10.100.74.0/24" = { az = "eu-west-1b", subnet_group = "gwlbe_eastwest" }
-      "10.100.6.0/24"  = { az = "eu-west-1a", subnet_group = "alb" }
+      #"10.100.6.0/24"  = { az = "eu-west-1a", subnet_group = "alb" }
       #"10.100.70.0/24" = { az = "eu-west-1b", subnet_group = "alb" }
-      "10.100.7.0/24"  = { az = "eu-west-1a", subnet_group = "nlb" }
+      #"10.100.7.0/24"  = { az = "eu-west-1a", subnet_group = "nlb" }
       #"10.100.71.0/24" = { az = "eu-west-1b", subnet_group = "nlb" }
     }
     
@@ -263,6 +264,7 @@ vpcs = {
         next_hop_key  = "security"
         next_hop_type = "transit_gateway_attachment"
       }
+      /*
       private_app2 = {
         vpc           = "security_vpc"
         subnet_group  = "private"
@@ -283,7 +285,7 @@ vpcs = {
         to_cidr       = "0.0.0.0/0"
         next_hop_key  = "security_vpc"
         next_hop_type = "internet_gateway"
-      }
+      }*/
     }
   }
   app1_vpc = {
@@ -321,8 +323,8 @@ vpcs = {
           }
         }
       }
+      /*
       app1_lb = {
-        /*
         name = "app1_lb"
         rules = {
           all_outbound = {
@@ -341,13 +343,12 @@ vpcs = {
             cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
           }
         }
-        */
-      }
+      }*/
     }
     subnets = {
       "10.104.0.0/24"   = { az = "eu-west-1a", subnet_group = "app1_vm" }
       #"10.104.128.0/24" = { az = "eu-west-1b", subnet_group = "app1_vm" }
-      "10.104.2.0/24"   = { az = "eu-west-1a", subnet_group = "app1_lb" }
+      #"10.104.2.0/24"   = { az = "eu-west-1a", subnet_group = "app1_lb" }
       #"10.104.130.0/24" = { az = "eu-west-1b", subnet_group = "app1_lb" }
     }
     routes = {
@@ -360,7 +361,6 @@ vpcs = {
         next_hop_key  = "app1"
         next_hop_type = "transit_gateway_attachment"
       }
-      /*
       lb_default = {
         vpc           = "app1_vpc"
         subnet_group  = "app1_lb"
@@ -368,7 +368,6 @@ vpcs = {
         next_hop_key  = "app1"
         next_hop_type = "transit_gateway_attachment"
       }
-      */
     }
   }
   /*
@@ -493,6 +492,7 @@ tgw_attachments = {
     route_table         = "from_spoke_vpc"
     propagate_routes_to = "from_security_vpc"
   }
+  /*
   app2 = {
     tgw_key             = "tgw"
     name                = "app2-spoke-vpc"
@@ -501,6 +501,7 @@ tgw_attachments = {
     route_table         = "from_spoke_vpc"
     propagate_routes_to = "from_security_vpc"
   }
+  */
 }
 
 ### GATEWAY LOADBALANCER
@@ -622,9 +623,8 @@ vmseries = {
       ntp_primary = "pool.ntp.org" # TODO: update here
     }
 
-  
+    /*
     application_lb = {
-      /*
       name           = "public-alb"
       subnet_group   = "alb"
       security_group = "application_load_balancer"
@@ -660,11 +660,9 @@ vmseries = {
           }
         }
       }
-      */
     }
 
     network_lb = {
-      /*
       name         = "public-nlb"
       subnet_group = "nlb"
       rules = {
@@ -683,8 +681,8 @@ vmseries = {
           preserve_client_ip = true
         }
       }
-      */
     }
+    */
   }
 }
 
@@ -734,8 +732,8 @@ spoke_vms = {
 }
 
 ### SPOKE LOADBALANCERS
-/*
 spoke_nlbs = {
+  /*
   "app1-nlb" = {
     name         = "app1-nlb"
     vpc          = "app1_vpc"
@@ -760,9 +758,11 @@ spoke_nlbs = {
       }
     }
   }
+  */
 }
 
 spoke_albs = {
+  /*
   "app1-alb" = {
     vms = ["app1_vm01", "app1_vm02"]
     rules = {
@@ -799,5 +799,5 @@ spoke_albs = {
     subnet_group    = "app2_lb"
     security_groups = "app2_lb"
   }
+  */
 }
-*/

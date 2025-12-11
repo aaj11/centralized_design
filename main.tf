@@ -432,6 +432,7 @@ module "vmseries" {
 
 ### Public ALB and NLB used in centralized model ###
 
+/*
 module "public_alb" {
   source = "./modules/alb"
 
@@ -468,6 +469,7 @@ module "public_nlb" {
 
   tags = var.global_tags
 }
+*/
 
 ### SPOKE VM INSTANCES ####
 
@@ -560,6 +562,7 @@ resource "aws_instance" "spoke_vms" {
 
 ### SPOKE INBOUND APPLICATION LOAD BALANCER ###
 
+/*
 module "app_alb" {
   source = "./modules/alb"
 
@@ -597,3 +600,4 @@ module "app_nlb" {
 
   tags = var.global_tags
 }
+*/
