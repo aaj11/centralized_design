@@ -763,8 +763,10 @@ spoke_nlbs = {
     }
   }
 }
+*/
 
 spoke_albs = {
+  /*
   "app1-alb" = {
     vms = ["app1_vm01", "app1_vm02"]
     rules = {
@@ -801,5 +803,5 @@ spoke_albs = {
     subnet_group    = "app2_lb"
     security_groups = "app2_lb"
   }
+  */
 }
-*/
