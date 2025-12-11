@@ -263,27 +263,27 @@ vpcs = {
         next_hop_key  = "security"
         next_hop_type = "transit_gateway_attachment"
       }
-      private_app2 = {
-        vpc           = "security_vpc"
-        subnet_group  = "private"
-        to_cidr       = "10.105.0.0/16"
-        next_hop_key  = "security"
-        next_hop_type = "transit_gateway_attachment"
-      }
-      alb_default = {
-        vpc           = "security_vpc"
-        subnet_group  = "alb"
-        to_cidr       = "0.0.0.0/0"
-        next_hop_key  = "security_vpc"
-        next_hop_type = "internet_gateway"
-      }
-      nlb_default = {
-        vpc           = "security_vpc"
-        subnet_group  = "nlb"
-        to_cidr       = "0.0.0.0/0"
-        next_hop_key  = "security_vpc"
-        next_hop_type = "internet_gateway"
-      }
+      # private_app2 = {
+      #   vpc           = "security_vpc"
+      #   subnet_group  = "private"
+      #   to_cidr       = "10.105.0.0/16"
+      #   next_hop_key  = "security"
+      #   next_hop_type = "transit_gateway_attachment"
+      # }
+      # alb_default = {
+      #   vpc           = "security_vpc"
+      #   subnet_group  = "alb"
+      #   to_cidr       = "0.0.0.0/0"
+      #   next_hop_key  = "security_vpc"
+      #   next_hop_type = "internet_gateway"
+      # }
+      # nlb_default = {
+      #   vpc           = "security_vpc"
+      #   subnet_group  = "nlb"
+      #   to_cidr       = "0.0.0.0/0"
+      #   next_hop_key  = "security_vpc"
+      #   next_hop_type = "internet_gateway"
+      # }
     }
   }
   app1_vpc = {
