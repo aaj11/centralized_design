@@ -155,26 +155,26 @@ vpcs = {
         }
       }
       
-      application_load_balancer = {
-        name = "alb"
-        rules = {
-          http_inbound_8081 = {
-            description = "Permit incoming APP1 traffic"
-            type        = "ingress", from_port = "8081", to_port = "8081", protocol = "tcp"
-            cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
-          }
-          http_inbound_8082 = {
-            description = "Permit incoming APP2 traffic"
-            type        = "ingress", from_port = "8082", to_port = "8082", protocol = "tcp"
-            cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
-          }
-          all_outbound = {
-            description = "Permit All traffic outbound"
-            type        = "egress", from_port = "0", to_port = "0", protocol = "-1"
-            cidr_blocks = ["0.0.0.0/0"]
-          }
-        }
-      }
+      # application_load_balancer = {
+      #   name = "alb"
+      #   rules = {
+      #     http_inbound_8081 = {
+      #       description = "Permit incoming APP1 traffic"
+      #       type        = "ingress", from_port = "8081", to_port = "8081", protocol = "tcp"
+      #       cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
+      #     }
+      #     http_inbound_8082 = {
+      #       description = "Permit incoming APP2 traffic"
+      #       type        = "ingress", from_port = "8082", to_port = "8082", protocol = "tcp"
+      #       cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
+      #     }
+      #     all_outbound = {
+      #       description = "Permit All traffic outbound"
+      #       type        = "egress", from_port = "0", to_port = "0", protocol = "-1"
+      #       cidr_blocks = ["0.0.0.0/0"]
+      #     }
+      #   }
+      # }
     }
     subnets = {
       "10.100.0.0/24"  = { az = "eu-west-1a", subnet_group = "mgmt" }
