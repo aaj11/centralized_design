@@ -155,7 +155,6 @@ vpcs = {
         }
       }
       
-      /*
       application_load_balancer = {
         name = "alb"
         rules = {
@@ -176,27 +175,26 @@ vpcs = {
           }
         }
       }
-      */
     }
     subnets = {
       "10.100.0.0/24"  = { az = "eu-west-1a", subnet_group = "mgmt" }
-      #"10.100.64.0/24" = { az = "eu-west-1b", subnet_group = "mgmt" }
+      "10.100.64.0/24" = { az = "eu-west-1b", subnet_group = "mgmt" }
       "10.100.1.0/24"  = { az = "eu-west-1a", subnet_group = "private", nacl = "trusted_path_monitoring" }
-      #"10.100.65.0/24" = { az = "eu-west-1b", subnet_group = "private", nacl = "trusted_path_monitoring" }
+      "10.100.65.0/24" = { az = "eu-west-1b", subnet_group = "private", nacl = "trusted_path_monitoring" }
       "10.100.2.0/24"  = { az = "eu-west-1a", subnet_group = "public" }
-      #"10.100.66.0/24" = { az = "eu-west-1b", subnet_group = "public" }
+      "10.100.66.0/24" = { az = "eu-west-1b", subnet_group = "public" }
       "10.100.3.0/24"  = { az = "eu-west-1a", subnet_group = "tgw_attach" }
-      #"10.100.67.0/24" = { az = "eu-west-1b", subnet_group = "tgw_attach" }
+      "10.100.67.0/24" = { az = "eu-west-1b", subnet_group = "tgw_attach" }
       "10.100.4.0/24"  = { az = "eu-west-1a", subnet_group = "gwlbe_outbound" }
-      #"10.100.68.0/24" = { az = "eu-west-1b", subnet_group = "gwlbe_outbound" }
+      "10.100.68.0/24" = { az = "eu-west-1b", subnet_group = "gwlbe_outbound" }
       "10.100.5.0/24"  = { az = "eu-west-1a", subnet_group = "gwlb" }
-      #"10.100.69.0/24" = { az = "eu-west-1b", subnet_group = "gwlb" } # AWS reccomends to always go up to the last possible AZ for GWLB service
+      "10.100.69.0/24" = { az = "eu-west-1b", subnet_group = "gwlb" } # AWS reccomends to always go up to the last possible AZ for GWLB service
       "10.100.10.0/24" = { az = "eu-west-1a", subnet_group = "gwlbe_eastwest" }
-      #"10.100.74.0/24" = { az = "eu-west-1b", subnet_group = "gwlbe_eastwest" }
-      #"10.100.6.0/24"  = { az = "eu-west-1a", subnet_group = "alb" }
-      #"10.100.70.0/24" = { az = "eu-west-1b", subnet_group = "alb" }
-      #"10.100.7.0/24"  = { az = "eu-west-1a", subnet_group = "nlb" }
-      #"10.100.71.0/24" = { az = "eu-west-1b", subnet_group = "nlb" }
+      "10.100.74.0/24" = { az = "eu-west-1b", subnet_group = "gwlbe_eastwest" }
+      "10.100.6.0/24"  = { az = "eu-west-1a", subnet_group = "alb" }
+      "10.100.70.0/24" = { az = "eu-west-1b", subnet_group = "alb" }
+      "10.100.7.0/24"  = { az = "eu-west-1a", subnet_group = "nlb" }
+      "10.100.71.0/24" = { az = "eu-west-1b", subnet_group = "nlb" }
     }
     
     routes = {
@@ -265,7 +263,6 @@ vpcs = {
         next_hop_key  = "security"
         next_hop_type = "transit_gateway_attachment"
       }
-      /*
       private_app2 = {
         vpc           = "security_vpc"
         subnet_group  = "private"
@@ -287,7 +284,6 @@ vpcs = {
         next_hop_key  = "security_vpc"
         next_hop_type = "internet_gateway"
       }
-      */
     }
   }
   app1_vpc = {
@@ -325,7 +321,6 @@ vpcs = {
           }
         }
       }
-      /*
       app1_lb = {
         name = "app1_lb"
         rules = {
@@ -346,13 +341,12 @@ vpcs = {
           }
         }
       }
-      */
     }
     subnets = {
       "10.104.0.0/24"   = { az = "eu-west-1a", subnet_group = "app1_vm" }
-      #"10.104.128.0/24" = { az = "eu-west-1b", subnet_group = "app1_vm" }
-      #"10.104.2.0/24"   = { az = "eu-west-1a", subnet_group = "app1_lb" }
-      #"10.104.130.0/24" = { az = "eu-west-1b", subnet_group = "app1_lb" }
+      "10.104.128.0/24" = { az = "eu-west-1b", subnet_group = "app1_vm" }
+      "10.104.2.0/24"   = { az = "eu-west-1a", subnet_group = "app1_lb" }
+      "10.104.130.0/24" = { az = "eu-west-1b", subnet_group = "app1_lb" }
     }
     routes = {
       # Value of `next_hop_key` must match keys use to create TGW attachment, IGW, GWLB endpoint or other resources
@@ -373,7 +367,6 @@ vpcs = {
       }
     }
   }
-  /*
   app2_vpc = {
     name  = "app2-spoke-vpc"
     cidr  = "10.105.0.0/16"
@@ -456,7 +449,6 @@ vpcs = {
     }
   }
 }
-*/
 
 ## TRANSIT GATEWAY
 tgws = {
@@ -496,7 +488,6 @@ tgw_attachments = {
     route_table         = "from_spoke_vpc"
     propagate_routes_to = "from_security_vpc"
   }
-  /*
   app2 = {
     tgw_key             = "tgw"
     name                = "app2-spoke-vpc"
@@ -505,7 +496,6 @@ tgw_attachments = {
     route_table         = "from_spoke_vpc"
     propagate_routes_to = "from_security_vpc"
   }
-  */
 }
 
 ### GATEWAY LOADBALANCER
@@ -540,7 +530,7 @@ vmseries = {
   vmseries = {
     instances = {
       "01" = { az = "eu-west-1a" }
-      #"02" = { az = "eu-west-1b" }
+      "02" = { az = "eu-west-1b" }
     }
 
     # Value of `panorama-server`, `auth-key`, `dgname`, `tplname` can be taken from plugin `sw_fw_license`. Delete map if SCM bootstrap required.
@@ -627,7 +617,7 @@ vmseries = {
       ntp_primary = "pool.ntp.org" # TODO: update here
     }
 
-    /*
+  
     application_lb = {
       name           = "public-alb"
       subnet_group   = "alb"
@@ -686,7 +676,6 @@ vmseries = {
         }
       }
     }
-    */
   }
 }
 
@@ -710,7 +699,6 @@ spoke_vms = {
     security_group = "app1_vm"
     type           = "t2.micro"
   }
-  /*
   "app1_vm02" = {
     az             = "eu-west-1b"
     vpc            = "app1_vpc"
@@ -732,11 +720,9 @@ spoke_vms = {
     security_group = "app2_vm"
     type           = "t2.micro"
   }
-  */
 }
 
 ### SPOKE LOADBALANCERS
-/*
 spoke_nlbs = {
   "app1-nlb" = {
     name         = "app1-nlb"
@@ -802,4 +788,3 @@ spoke_albs = {
     security_groups = "app2_lb"
   }
 }
-*/
