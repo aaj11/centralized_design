@@ -175,8 +175,7 @@ vpcs = {
             cidr_blocks = ["0.0.0.0/0"]
           }
         }
-      }
-      */
+      } */
     }
     subnets = {
       "10.100.0.0/24"  = { az = "eu-west-1a", subnet_group = "mgmt" }
@@ -286,8 +285,7 @@ vpcs = {
         to_cidr       = "0.0.0.0/0"
         next_hop_key  = "security_vpc"
         next_hop_type = "internet_gateway"
-      }
-      */
+      }*/
     }
   }
   app1_vpc = {
@@ -345,8 +343,7 @@ vpcs = {
             cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
           }
         }
-      }
-      */
+      }*/
     }
     subnets = {
       "10.104.0.0/24"   = { az = "eu-west-1a", subnet_group = "app1_vm" }
@@ -454,9 +451,8 @@ vpcs = {
         next_hop_type = "transit_gateway_attachment"
       }
     }
-  }
+  }*/
 }
-*/
 
 ## TRANSIT GATEWAY
 tgws = {
@@ -736,8 +732,8 @@ spoke_vms = {
 }
 
 ### SPOKE LOADBALANCERS
-/*
 spoke_nlbs = {
+  /*
   "app1-nlb" = {
     name         = "app1-nlb"
     vpc          = "app1_vpc"
@@ -762,8 +758,8 @@ spoke_nlbs = {
       }
     }
   }
+  */
 }
-*/
 
 spoke_albs = {
   /*
