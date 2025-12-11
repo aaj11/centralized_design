@@ -321,31 +321,31 @@ vpcs = {
           }
         }
       }
-      app1_lb = {
-        name = "app1_lb"
-        rules = {
-          all_outbound = {
-            description = "Permit All traffic outbound"
-            type        = "egress", from_port = "0", to_port = "0", protocol = "-1"
-            cidr_blocks = ["0.0.0.0/0"]
-          }
-          https = {
-            description = "Permit HTTPS"
-            type        = "ingress", from_port = "443", to_port = "443", protocol = "tcp"
-            cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
-          }
-          http = {
-            description = "Permit HTTP"
-            type        = "ingress", from_port = "80", to_port = "80", protocol = "tcp"
-            cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
-          }
-        }
-      }
+      # app1_lb = {
+      #   name = "app1_lb"
+      #   rules = {
+      #     all_outbound = {
+      #       description = "Permit All traffic outbound"
+      #       type        = "egress", from_port = "0", to_port = "0", protocol = "-1"
+      #       cidr_blocks = ["0.0.0.0/0"]
+      #     }
+      #     https = {
+      #       description = "Permit HTTPS"
+      #       type        = "ingress", from_port = "443", to_port = "443", protocol = "tcp"
+      #       cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
+      #     }
+      #     http = {
+      #       description = "Permit HTTP"
+      #       type        = "ingress", from_port = "80", to_port = "80", protocol = "tcp"
+      #       cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
+      #     }
+      #   }
+      # }
     }
     subnets = {
       "10.104.0.0/24"   = { az = "eu-west-1a", subnet_group = "app1_vm" }
       #"10.104.128.0/24" = { az = "eu-west-1b", subnet_group = "app1_vm" }
-      "10.104.2.0/24"   = { az = "eu-west-1a", subnet_group = "app1_lb" }
+      #"10.104.2.0/24"   = { az = "eu-west-1a", subnet_group = "app1_lb" }
       #"10.104.130.0/24" = { az = "eu-west-1b", subnet_group = "app1_lb" }
     }
     routes = {
