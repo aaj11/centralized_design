@@ -6,6 +6,7 @@ output "vmseries_public_ips" {
 }
 
 ##### VM-Series ALB & NLB #####
+/*
 
 output "public_alb_dns_name" {
   description = "FQDN of VM-Series External Application Load Balancer used in centralized design."
@@ -31,3 +32,4 @@ output "network_load_balancers" {
   EOF
   value       = { for k, v in module.app_nlb : k => v.lb_fqdn }
 }
+*/
