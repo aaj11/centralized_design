@@ -321,28 +321,26 @@ vpcs = {
           }
         }
       }
-      app1_lb = {
-        /*
-        name = "app1_lb"
-        rules = {
-          all_outbound = {
-            description = "Permit All traffic outbound"
-            type        = "egress", from_port = "0", to_port = "0", protocol = "-1"
-            cidr_blocks = ["0.0.0.0/0"]
-          }
-          https = {
-            description = "Permit HTTPS"
-            type        = "ingress", from_port = "443", to_port = "443", protocol = "tcp"
-            cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
-          }
-          http = {
-            description = "Permit HTTP"
-            type        = "ingress", from_port = "80", to_port = "80", protocol = "tcp"
-            cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
-          }
-        }
-        */
-      }
+      # app1_lb = {
+      #   name = "app1_lb"
+      #   rules = {
+      #     all_outbound = {
+      #       description = "Permit All traffic outbound"
+      #       type        = "egress", from_port = "0", to_port = "0", protocol = "-1"
+      #       cidr_blocks = ["0.0.0.0/0"]
+      #     }
+      #     https = {
+      #       description = "Permit HTTPS"
+      #       type        = "ingress", from_port = "443", to_port = "443", protocol = "tcp"
+      #       cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
+      #     }
+      #     http = {
+      #       description = "Permit HTTP"
+      #       type        = "ingress", from_port = "80", to_port = "80", protocol = "tcp"
+      #       cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
+      #     }
+      #   }
+      # }
     }
     subnets = {
       "10.104.0.0/24"   = { az = "eu-west-1a", subnet_group = "app1_vm" }
@@ -360,99 +358,96 @@ vpcs = {
         next_hop_key  = "app1"
         next_hop_type = "transit_gateway_attachment"
       }
-      /*
-      lb_default = {
-        vpc           = "app1_vpc"
-        subnet_group  = "app1_lb"
-        to_cidr       = "0.0.0.0/0"
-        next_hop_key  = "app1"
-        next_hop_type = "transit_gateway_attachment"
-      }
-      */
+      # lb_default = {
+      #   vpc           = "app1_vpc"
+      #   subnet_group  = "app1_lb"
+      #   to_cidr       = "0.0.0.0/0"
+      #   next_hop_key  = "app1"
+      #   next_hop_type = "transit_gateway_attachment"
+      # }
     }
   }
-  /*
-  app2_vpc = {
-    name  = "app2-spoke-vpc"
-    cidr  = "10.105.0.0/16"
-    nacls = {}
-    security_groups = {
-      app2_vm = {
-        name = "app2_vm"
-        rules = {
-          all_outbound = {
-            description = "Permit All traffic outbound"
-            type        = "egress", from_port = "0", to_port = "0", protocol = "-1"
-            cidr_blocks = ["0.0.0.0/0"]
-          }
-          private_inbound = {
-            description = "Permit All traffic inbound from 10.0.0.0/8"
-            type        = "ingress", from_port = "0", to_port = "0", protocol = "-1"
-            cidr_blocks = ["10.0.0.0/8"] # TODO: update here
-          }
-          ssh = {
-            description = "Permit SSH"
-            type        = "ingress", from_port = "22", to_port = "22", protocol = "tcp"
-            cidr_blocks = ["1.1.1.1/32", "10.104.0.0/16", "10.105.0.0/16"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
-          }
-          https = {
-            description = "Permit HTTPS"
-            type        = "ingress", from_port = "443", to_port = "443", protocol = "tcp"
-            cidr_blocks = ["1.1.1.1/32", "10.104.0.0/16", "10.105.0.0/16"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
-          }
-          http = {
-            description = "Permit HTTP"
-            type        = "ingress", from_port = "80", to_port = "80", protocol = "tcp"
-            cidr_blocks = ["1.1.1.1/32", "10.104.0.0/16", "10.105.0.0/16"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
-          }
-        }
-      }
-      app2_lb = {
-        name = "app2_lb"
-        rules = {
-          all_outbound = {
-            description = "Permit All traffic outbound"
-            type        = "egress", from_port = "0", to_port = "0", protocol = "-1"
-            cidr_blocks = ["0.0.0.0/0"]
-          }
-          https = {
-            description = "Permit HTTPS"
-            type        = "ingress", from_port = "443", to_port = "443", protocol = "tcp"
-            cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
-          }
-          http = {
-            description = "Permit HTTP"
-            type        = "ingress", from_port = "80", to_port = "80", protocol = "tcp"
-            cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
-          }
-        }
-      }
-    }
-    subnets = {
-      "10.105.0.0/24"   = { az = "eu-west-1a", subnet_group = "app2_vm" }
-      "10.105.128.0/24" = { az = "eu-west-1b", subnet_group = "app2_vm" }
-      "10.105.2.0/24"   = { az = "eu-west-1a", subnet_group = "app2_lb" }
-      "10.105.130.0/24" = { az = "eu-west-1b", subnet_group = "app2_lb" }
-    }
-    routes = {
-      # Value of `next_hop_key` must match keys use to create TGW attachment, IGW, GWLB endpoint or other resources
-      # Value of `next_hop_type` is internet_gateway, nat_gateway, transit_gateway_attachment or gwlbe_endpoint
-      vm_default = {
-        vpc           = "app2_vpc"
-        subnet_group  = "app2_vm"
-        to_cidr       = "0.0.0.0/0"
-        next_hop_key  = "app2"
-        next_hop_type = "transit_gateway_attachment"
-      }
-      lb_default = {
-        vpc           = "app2_vpc"
-        subnet_group  = "app2_lb"
-        to_cidr       = "0.0.0.0/0"
-        next_hop_key  = "app2"
-        next_hop_type = "transit_gateway_attachment"
-      }
-    }
-  }*/
+  # app2_vpc = {
+  #   name  = "app2-spoke-vpc"
+  #   cidr  = "10.105.0.0/16"
+  #   nacls = {}
+  #   security_groups = {
+  #     app2_vm = {
+  #       name = "app2_vm"
+  #       rules = {
+  #         all_outbound = {
+  #           description = "Permit All traffic outbound"
+  #           type        = "egress", from_port = "0", to_port = "0", protocol = "-1"
+  #           cidr_blocks = ["0.0.0.0/0"]
+  #         }
+  #         private_inbound = {
+  #           description = "Permit All traffic inbound from 10.0.0.0/8"
+  #           type        = "ingress", from_port = "0", to_port = "0", protocol = "-1"
+  #           cidr_blocks = ["10.0.0.0/8"] # TODO: update here
+  #         }
+  #         ssh = {
+  #           description = "Permit SSH"
+  #           type        = "ingress", from_port = "22", to_port = "22", protocol = "tcp"
+  #           cidr_blocks = ["1.1.1.1/32", "10.104.0.0/16", "10.105.0.0/16"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
+  #         }
+  #         https = {
+  #           description = "Permit HTTPS"
+  #           type        = "ingress", from_port = "443", to_port = "443", protocol = "tcp"
+  #           cidr_blocks = ["1.1.1.1/32", "10.104.0.0/16", "10.105.0.0/16"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
+  #         }
+  #         http = {
+  #           description = "Permit HTTP"
+  #           type        = "ingress", from_port = "80", to_port = "80", protocol = "tcp"
+  #           cidr_blocks = ["1.1.1.1/32", "10.104.0.0/16", "10.105.0.0/16"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
+  #         }
+  #       }
+  #     }
+  #     app2_lb = {
+  #       name = "app2_lb"
+  #       rules = {
+  #         all_outbound = {
+  #           description = "Permit All traffic outbound"
+  #           type        = "egress", from_port = "0", to_port = "0", protocol = "-1"
+  #           cidr_blocks = ["0.0.0.0/0"]
+  #         }
+  #         https = {
+  #           description = "Permit HTTPS"
+  #           type        = "ingress", from_port = "443", to_port = "443", protocol = "tcp"
+  #           cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
+  #         }
+  #         http = {
+  #           description = "Permit HTTP"
+  #           type        = "ingress", from_port = "80", to_port = "80", protocol = "tcp"
+  #           cidr_blocks = ["1.1.1.1/32"] # TODO: update here (replace 1.1.1.1/32 with your IP range)
+  #         }
+  #       }
+  #     }
+  #   }
+  #   subnets = {
+  #     "10.105.0.0/24"   = { az = "eu-west-1a", subnet_group = "app2_vm" }
+  #     "10.105.128.0/24" = { az = "eu-west-1b", subnet_group = "app2_vm" }
+  #     "10.105.2.0/24"   = { az = "eu-west-1a", subnet_group = "app2_lb" }
+  #     "10.105.130.0/24" = { az = "eu-west-1b", subnet_group = "app2_lb" }
+  #   }
+  #   routes = {
+  #     # Value of `next_hop_key` must match keys use to create TGW attachment, IGW, GWLB endpoint or other resources
+  #     # Value of `next_hop_type` is internet_gateway, nat_gateway, transit_gateway_attachment or gwlbe_endpoint
+  #     vm_default = {
+  #       vpc           = "app2_vpc"
+  #       subnet_group  = "app2_vm"
+  #       to_cidr       = "0.0.0.0/0"
+  #       next_hop_key  = "app2"
+  #       next_hop_type = "transit_gateway_attachment"
+  #     }
+  #     lb_default = {
+  #       vpc           = "app2_vpc"
+  #       subnet_group  = "app2_lb"
+  #       to_cidr       = "0.0.0.0/0"
+  #       next_hop_key  = "app2"
+  #       next_hop_type = "transit_gateway_attachment"
+  #     }
+  #   }
+  # }
 }
 
 ## TRANSIT GATEWAY
@@ -623,68 +618,64 @@ vmseries = {
     }
 
   
-    application_lb = {
-      /*
-      name           = "public-alb"
-      subnet_group   = "alb"
-      security_group = "application_load_balancer"
-      rules = {
-        "app1" = {
-          protocol              = "HTTP"
-          port                  = 8081
-          health_check_port     = "8081"
-          health_check_matcher  = "200"
-          health_check_path     = "/"
-          health_check_interval = 10
-          listener_rules = {
-            "1" = {
-              target_protocol = "HTTP"
-              target_port     = 8081
-              path_pattern    = ["/"]
-            }
-          }
-        }
-        "app2" = {
-          protocol              = "HTTP"
-          port                  = 8082
-          health_check_port     = "8082"
-          health_check_matcher  = "200"
-          health_check_path     = "/"
-          health_check_interval = 10
-          listener_rules = {
-            "1" = {
-              target_protocol = "HTTP"
-              target_port     = 8082
-              path_pattern    = ["/"]
-            }
-          }
-        }
-      }
-      */
-    }
+    # application_lb = {
+    #   name           = "public-alb"
+    #   subnet_group   = "alb"
+    #   security_group = "application_load_balancer"
+    #   rules = {
+    #     "app1" = {
+    #       protocol              = "HTTP"
+    #       port                  = 8081
+    #       health_check_port     = "8081"
+    #       health_check_matcher  = "200"
+    #       health_check_path     = "/"
+    #       health_check_interval = 10
+    #       listener_rules = {
+    #         "1" = {
+    #           target_protocol = "HTTP"
+    #           target_port     = 8081
+    #           path_pattern    = ["/"]
+    #         }
+    #       }
+    #     }
+    #     "app2" = {
+    #       protocol              = "HTTP"
+    #       port                  = 8082
+    #       health_check_port     = "8082"
+    #       health_check_matcher  = "200"
+    #       health_check_path     = "/"
+    #       health_check_interval = 10
+    #       listener_rules = {
+    #         "1" = {
+    #           target_protocol = "HTTP"
+    #           target_port     = 8082
+    #           path_pattern    = ["/"]
+    #         }
+    #       }
+    #     }
+    #   }
+    # }
 
-    network_lb = {
-      /*
-      name         = "public-nlb"
-      subnet_group = "nlb"
-      rules = {
-        "ssh1" = {
-          protocol           = "TCP"
-          port               = "2021"
-          target_type        = "ip"
-          stickiness         = true
-          preserve_client_ip = true
-        }
-        "ssh2" = {
-          protocol           = "TCP"
-          port               = "2022"
-          target_type        = "ip"
-          stickiness         = true
-          preserve_client_ip = true
-        }
-      }
-      */
-    }
+    # network_lb = {
+    #   name         = "public-nlb"
+    #   subnet_group = "nlb"
+    #   rules = {
+    #     "ssh1" = {
+    #       protocol           = "TCP"
+    #       port               = "2021"
+    #       target_type        = "ip"
+    #       stickiness         = true
+    #       preserve_client_ip = true
+    #     }
+    #     "ssh2" = {
+    #       protocol           = "TCP"
+    #       port               = "2022"
+    #       target_type        = "ip"
+    #       stickiness         = true
+    #       preserve_client_ip = true
+    #     }
+    #   }
+    # }
   }
 }
 
@@ -708,96 +699,92 @@ spoke_vms = {
     security_group = "app1_vm"
     type           = "t2.micro"
   }
-  /*
-  "app1_vm02" = {
-    az             = "eu-west-1b"
-    vpc            = "app1_vpc"
-    subnet_group   = "app1_vm"
-    security_group = "app1_vm"
-    type           = "t2.micro"
-  }
-  "app2_vm01" = {
-    az             = "eu-west-1a"
-    vpc            = "app2_vpc"
-    subnet_group   = "app2_vm"
-    security_group = "app2_vm"
-    type           = "t2.micro"
-  }
-  "app2_vm02" = {
-    az             = "eu-west-1b"
-    vpc            = "app2_vpc"
-    subnet_group   = "app2_vm"
-    security_group = "app2_vm"
-    type           = "t2.micro"
-  }
-  */
-}
+#   "app1_vm02" = {
+#     az             = "eu-west-1b"
+#     vpc            = "app1_vpc"
+#     subnet_group   = "app1_vm"
+#     security_group = "app1_vm"
+#     type           = "t2.micro"
+#   }
+#   "app2_vm01" = {
+#     az             = "eu-west-1a"
+#     vpc            = "app2_vpc"
+#     subnet_group   = "app2_vm"
+#     security_group = "app2_vm"
+#     type           = "t2.micro"
+#   }
+#   "app2_vm02" = {
+#     az             = "eu-west-1b"
+#     vpc            = "app2_vpc"
+#     subnet_group   = "app2_vm"
+#     security_group = "app2_vm"
+#     type           = "t2.micro"
+#   }
+# }
 
 ### SPOKE LOADBALANCERS
-/*
-spoke_nlbs = {
-  "app1-nlb" = {
-    name         = "app1-nlb"
-    vpc          = "app1_vpc"
-    subnet_group = "app1_lb"
-    vms          = ["app1_vm01", "app1_vm02"]
-    balance_rules = {
-      "SSH" = {
-        port     = "22"
-        protocol = "TCP"
-      }
-    }
-  }
-  "app2-nlb" = {
-    name         = "app2-nlb"
-    vpc          = "app2_vpc"
-    subnet_group = "app2_lb"
-    vms          = ["app2_vm01", "app2_vm02"]
-    balance_rules = {
-      "SSH" = {
-        port     = "22"
-        protocol = "TCP"
-      }
-    }
-  }
-}
+# spoke_nlbs = {
+#   "app1-nlb" = {
+#     name         = "app1-nlb"
+#     vpc          = "app1_vpc"
+#     subnet_group = "app1_lb"
+#     vms          = ["app1_vm01", "app1_vm02"]
+#     balance_rules = {
+#       "SSH" = {
+#         port     = "22"
+#         protocol = "TCP"
+#       }
+#     }
+#   }
+#   "app2-nlb" = {
+#     name         = "app2-nlb"
+#     vpc          = "app2_vpc"
+#     subnet_group = "app2_lb"
+#     vms          = ["app2_vm01", "app2_vm02"]
+#     balance_rules = {
+#       "SSH" = {
+#         port     = "22"
+#         protocol = "TCP"
+#       }
+#     }
+#   }
+# }
 
-spoke_albs = {
-  "app1-alb" = {
-    vms = ["app1_vm01", "app1_vm02"]
-    rules = {
-      "app1" = {
-        health_check_port = "80"
-        listener_rules = {
-          "1" = {
-            target_protocol = "HTTP"
-            target_port     = 80
-            path_pattern    = ["/"]
-          }
-        }
-      }
-    }
-    vpc             = "app1_vpc"
-    subnet_group    = "app1_lb"
-    security_groups = "app1_lb"
-  }
-  "app2-alb" = {
-    vms = ["app2_vm01", "app2_vm02"]
-    rules = {
-      "app2" = {
-        health_check_port = "80"
-        listener_rules = {
-          "1" = {
-            target_protocol = "HTTP"
-            target_port     = 80
-            path_pattern    = ["/"]
-          }
-        }
-      }
-    }
-    vpc             = "app2_vpc"
-    subnet_group    = "app2_lb"
-    security_groups = "app2_lb"
-  }
-}
-*/
+# spoke_albs = {
+#   "app1-alb" = {
+#     vms = ["app1_vm01", "app1_vm02"]
+#     rules = {
+#       "app1" = {
+#         health_check_port = "80"
+#         listener_rules = {
+#           "1" = {
+#             target_protocol = "HTTP"
+#             target_port     = 80
+#             path_pattern    = ["/"]
+#           }
+#         }
+#       }
+#     }
+#     vpc             = "app1_vpc"
+#     subnet_group    = "app1_lb"
+#     security_groups = "app1_lb"
+#   }
+#   "app2-alb" = {
+#     vms = ["app2_vm01", "app2_vm02"]
+#     rules = {
+#       "app2" = {
+#         health_check_port = "80"
+#         listener_rules = {
+#           "1" = {
+#             target_protocol = "HTTP"
+#             target_port     = 80
+#             path_pattern    = ["/"]
+#           }
+#         }
+#       }
+#     }
+#     vpc             = "app2_vpc"
+#     subnet_group    = "app2_lb"
+#     security_groups = "app2_lb"
+#   }
+# }
