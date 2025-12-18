@@ -11,3 +11,8 @@ output "public_ips" {
   description = "Map of public IPs created within the module."
   value       = { for k, v in aws_eip.this : k => v.public_ip }
 }
+
+output "user_date" {
+  description = "FW bootstrap data."
+  value       = var.bootstrap_options
+}
