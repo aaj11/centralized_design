@@ -7,7 +7,7 @@ output "vmseries_public_ips" {
 
 output "vmseries_bootstrap_options" {
   description = "FW bootstrap data."
-  value       = { for k, v in module.vmseries : k => v.user_data }
+  value       = { for k, v in module.vmseries : k => v.bootstrap_options }
 }
 
 ##### VM-Series ALB & NLB #####

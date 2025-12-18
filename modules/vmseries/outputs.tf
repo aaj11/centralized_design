@@ -12,7 +12,7 @@ output "public_ips" {
   value       = { for k, v in aws_eip.this : k => v.public_ip }
 }
 
-output "user_date" {
+output "bootstrap_options" {
   description = "FW bootstrap data."
   value       = var.bootstrap_options
 }
